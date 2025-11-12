@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soil Guide - Smart Farming Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #c8e6c9;
+        }
+
+        .page-header {
+            text-align: center;
+            margin: 2rem 0;
+            color: #2e7d32;
+        }
+
+        .soil-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .soil-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .soil-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .soil-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .soil-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(46, 125, 50, 0.9);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .soil-content {
+            padding: 1.5rem;
+        }
+
+        .soil-content h3 {
+            margin-bottom: 1rem;
+            color: #2e7d32;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .soil-icon {
+            font-size: 1.5rem;
+        }
+
+        .characteristics {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+
+        .crops-list {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .crops-list li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .crop-icon {
+            color: #4caf50;
+            font-size: 1.2rem;
+        }
+
+        .activation-tips {
+            background: #e8f5e9;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 3rem 0;
+        }
+
+        .activation-tips h2 {
+            color: #2e7d32;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tip-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .tip-icon {
+            font-size: 2.5rem;
+            color: #4caf50;
+            margin-bottom: 1rem;
+        }
+
+        .soil-comparison {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .comparison-table th {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: #4caf50;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #2e7d32;
+        }
+
+        .soil-features {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        .feature-value {
+            font-weight: bold;
+            color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Smart Farming Solutions</div>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('soil') }}">Soil Guide</a></li>
+                    <li><a href="{{ url_for('animals') }}">Animal Husbandry</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Soil Management Guide</h1>
+            <p>Understanding soil types and crop compatibility for optimal yields</p>
+        </div>
+
+        <div class="soil-types">
+            <!-- Loamy Soil -->
+            <div class="soil-card">
+                <div class="soil-img" style="background-image: url('https://images.unsplash.com/photo-1591862715136-89bd4736c5b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                    <div class="soil-label">Best All-Rounder</div>
+                </div>
+                <div class="soil-content">
+                    <h3><span class="soil-icon">🌱</span> Loamy Soil</h3>
+                    <div class="characteristics">
+                        <p><strong>Perfect balance of sand, silt, and clay</strong></p>
+                        <p>Well-draining yet retains moisture effectively</p>
+                    </div>
+                    <div class="soil-features">
+                        <div class="feature">
+                            <div class="feature-value">Excellent</div>
+                            <div>Drainage</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">High</div>
+                            <div>Nutrients</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">Easy</div>
+                            <div>to Work</div>
+                        </div>
+                    </div>
+                    <p><strong>Best Crops:</strong></p>
+                    <ul class="crops-list">
+                        <li><span class="crop-icon">🥕</span> Vegetables (tomatoes, peppers, lettuce)</li>
+                        <li><span class="crop-icon">🍓</span> Fruits (strawberries, melons)</li>
+                        <li><span class="crop-icon">🌽</span> Grains (wheat, corn)</li>
+                    </ul>
+                    <p><strong>Activation:</strong> Add compost and organic matter annually</p>
+                </div>
+            </div>
+
+            <!-- Clay Soil -->
+            <div class="soil-card">
+                <div class="soil-img" style="background-image: url('https://images.unsplash.com/photo-1557237474-ae67eb42d0f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                    <div class="soil-label">Nutrient Rich</div>
+                </div>
+                <div class="soil-content">
+                    <h3><span class="soil-icon">🧱</span> Clay Soil</h3>
+                    <div class="characteristics">
+                        <p><strong>Heavy and nutrient-dense soil</strong></p>
+                        <p>Excellent water retention but poor drainage</p>
+                    </div>
+                    <div class="soil-features">
+                        <div class="feature">
+                            <div class="feature-value">Poor</div>
+                            <div>Drainage</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">Very High</div>
+                            <div>Nutrients</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">Hard</div>
+                            <div>to Work</div>
+                        </div>
+                    </div>
+                    <p><strong>Best Crops:</strong></p>
+                    <ul class="crops-list">
+                        <li><span class="crop-icon">🌳</span> Fruit trees (apple, pear)</li>
+                        <li><span class="crop-icon">🥦</span> Brassicas (cabbage, broccoli)</li>
+                        <li><span class="crop-icon">🎃</span> Summer crops (squash, pumpkin)</li>
+                    </ul>
+                    <p><strong>Activation:</strong> Add gypsum and organic matter to improve drainage</p>
+                </div>
+            </div>
+
+            <!-- Sandy Soil -->
+            <div class="soil-card">
+                <div class="soil-img" style="background-image: url('https://images.unsplash.com/photo-1560498868-cd8e9e4c3b1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                    <div class="soil-label">Fast Draining</div>
+                </div>
+                <div class="soil-content">
+                    <h3><span class="soil-icon">🏖️</span> Sandy Soil</h3>
+                    <div class="characteristics">
+                        <p><strong>Light and quick-draining soil</strong></p>
+                        <p>Warms quickly in spring but low in nutrients</p>
+                    </div>
+                    <div class="soil-features">
+                        <div class="feature">
+                            <div class="feature-value">Excellent</div>
+                            <div>Drainage</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">Low</div>
+                            <div>Nutrients</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">Very Easy</div>
+                            <div>to Work</div>
+                        </div>
+                    </div>
+                    <p><strong>Best Crops:</strong></p>
+                    <ul class="crops-list">
+                        <li><span class="crop-icon">🥔</span> Root vegetables (carrots, potatoes)</li>
+                        <li><span class="crop-icon">🌿</span> Herbs (lavender, rosemary)</li>
+                        <li><span class="crop-icon">☀️</span> Mediterranean plants</li>
+                    </ul>
+                    <p><strong>Activation:</strong> Add compost and clay to improve water retention</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Soil Comparison Table -->
+        <div class="soil-comparison">
+            <h2 style="color: #2e7d32; text-align: center; margin-bottom: 1.5rem;">Soil Type Comparison</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Loamy Soil</th>
+                        <th>Clay Soil</th>
+                        <th>Sandy Soil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Texture</strong></td>
+                        <td>Crumbly, soft</td>
+                        <td>Sticky, heavy</td>
+                        <td>Gritty, loose</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Drainage</strong></td>
+                        <td>Excellent</td>
+                        <td>Poor</td>
+                        <td>Very Good</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nutrient Level</strong></td>
+                        <td>High</td>
+                        <td>Very High</td>
+                        <td>Low</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Water Retention</strong></td>
+                        <td>Good</td>
+                        <td>Excellent</td>
+                        <td>Poor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ease of Working</strong></td>
+                        <td>Easy</td>
+                        <td>Difficult</td>
+                        <td>Very Easy</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Warming Speed</strong></td>
+                        <td>Moderate</td>
+                        <td>Slow</td>
+                        <td>Fast</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="activation-tips">
+            <h2>Soil Activation Techniques</h2>
+            <div class="tips-grid">
+                <div class="tip-item">
+                    <div class="tip-icon">♻️</div>
+                    <h3>Composting</h3>
+                    <p>Add well-rotted compost to improve soil structure and nutrient content. Apply 2-4 inches annually.</p>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-icon">🌿</div>
+                    <h3>Cover Cropping</h3>
+                    <p>Plant legumes like clover or vetch to fix nitrogen in the soil and prevent erosion.</p>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-icon">🔬</div>
+                    <h3>Soil Testing</h3>
+                    <p>Regularly test pH and nutrient levels. Adjust with lime (to raise pH) or sulfur (to lower pH).</p>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-icon">🔄</div>
+                    <h3>Crop Rotation</h3>
+                    <p>Rotate crops annually to prevent nutrient depletion and reduce pest buildup.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="{{ url_for('home') }}" class="back-btn">Back to Home</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Smart Farming Solutions - Agricultural Excellence</p>
+        </div>
+    </footer>
+</body>
+</html>

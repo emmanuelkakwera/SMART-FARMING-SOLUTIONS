@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Husbandry - Smart Farming Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #c8e6c9;
+        }
+
+        .page-header {
+            text-align: center;
+            margin: 2rem 0;
+            color: #2e7d32;
+        }
+
+        .animal-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .animal-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .animal-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+        }
+
+        .animal-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .animal-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            padding-top: 1.5rem;
+        }
+
+        .animal-card-content {
+            padding: 1.5rem;
+        }
+
+        .animal-card h3 {
+            color: #2e7d32;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .animal-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .animal-features {
+            display: flex;
+            justify-content: space-around;
+            margin: 1rem 0;
+            padding: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .feature {
+            text-align: center;
+        }
+
+        .feature-value {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 0.9rem;
+        }
+
+        .feature-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #4caf50;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: #2e7d32;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: #4caf50;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #2e7d32;
+        }
+
+        .intro-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .animal-count {
+            background: #2e7d32;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Smart Farming Solutions</div>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('soil') }}">Soil Guide</a></li>
+                    <li><a href="{{ url_for('animals') }}">Animal Husbandry</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Animal Husbandry Guide</h1>
+            <p class="intro-text">Comprehensive information on raising healthy livestock with modern farming practices and traditional knowledge. Click on any animal to learn about breeds, diseases, and management practices.</p>
+        </div>
+
+        <div class="animal-categories">
+            <!-- Chickens -->
+            <div class="animal-card">
+                <div class="animal-image" style="background-image: url('https://images.unsplash.com/photo-1548550023-5f6f2c7b0e23?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                    <div class="animal-count">7+ Breeds</div>
+                </div>
+                <div class="animal-card-content">
+                    <div class="animal-icon">🐔</div>
+                    <h3>Chickens</h3>
+                    <p>Complete guide to poultry farming including local breeds like Mikolongwe, Kuroiler, and exotic varieties for egg and meat production.</p>
+                    <div class="animal-features">
+                        <div class="feature">
+                            <div class="feature-value">5+ Diseases</div>
+                            <div class="feature-label">Covered</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">Vaccination</div>
+                            <div class="feature-label">Schedule</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">Local Breeds</div>
+                            <div class="feature-label">Included</div>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('animal_category', category='chickens') }}" class="btn">Learn About Chickens</a>
+                </div>
+            </div>
+
+            <!-- Cattle -->
+            <div class="animal-card">
+                <div class="animal-image" style="background-image: url('https://images.unsplash.com/photo-1563201516-139ace66363b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                    <div class="animal-count">5+ Breeds</div>
+                </div>
+                <div class="animal-card-content">
+                    <div class="animal-icon">🐄</div>
+                    <h3>Cattle</h3>
+                    <p>Beef and dairy production with Malawi Zebu, Brangus crosses, and management practices for small and large scale farming.</p>
+                    <div class="animal-features">
+                        <div class="feature">
+                            <div class="feature-value">6+ Diseases</div>
+                            <div class="feature-label">Covered</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">Vaccination</div>
+                            <div class="feature-label">Schedule</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">Local Breeds</div>
+                            <div class="feature-label">Included</div>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('animal_category', category='cattle') }}" class="btn">Learn About Cattle</a>
+                </div>
+            </div>
+
+            <!-- Goats -->
+            <div class="animal-card">
+                <div class="animal-image" style="background-image: url('https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                    <div class="animal-count">4+ Breeds</div>
+                </div>
+                <div class="animal-card-content">
+                    <div class="animal-icon">🐐</div>
+                    <h3>Goats</h3>
+                    <p>Meat and milk production with Small East African goats, Boer crosses, and comprehensive health management guidelines.</p>
+                    <div class="animal-features">
+                        <div class="feature">
+                            <div class="feature-value">5+ Diseases</div>
+                            <div class="feature-label">Covered</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">Deworming</div>
+                            <div class="feature-label">Schedule</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">Local Breeds</div>
+                            <div class="feature-label">Included</div>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('animal_category', category='goats') }}" class="btn">Learn About Goats</a>
+                </div>
+            </div>
+
+            <!-- Pigs -->
+            <div class="animal-card">
+                <div class="animal-image" style="background-image: url('https://images.unsplash.com/photo-1589923188651-268a75d5d01b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                    <div class="animal-count">3+ Breeds</div>
+                </div>
+                <div class="animal-card-content">
+                    <div class="animal-icon">🐖</div>
+                    <h3>Pigs</h3>
+                    <p>Pork production with local indigenous pigs, Landrace crosses, and disease prevention for African Swine Fever.</p>
+                    <div class="animal-features">
+                        <div class="feature">
+                            <div class="feature-value">5+ Diseases</div>
+                            <div class="feature-label">Covered</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">Vaccination</div>
+                            <div class="feature-label">Schedule</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">Local Breeds</div>
+                            <div class="feature-label">Included</div>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('animal_category', category='pigs') }}" class="btn">Learn About Pigs</a>
+                </div>
+            </div>
+
+            <!-- Sheep -->
+            <div class="animal-card">
+                <div class="animal-image" style="background-image: url('https://images.unsplash.com/photo-1506905925340-14f6bbb6eff1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                    <div class="animal-count">3+ Breeds</div>
+                </div>
+                <div class="animal-card-content">
+                    <div class="animal-icon">🐑</div>
+                    <h3>Sheep</h3>
+                    <p>Wool and meat production with local indigenous sheep, Dorper crosses, and flock management practices.</p>
+                    <div class="animal-features">
+                        <div class="feature">
+                            <div class="feature-value">4+ Diseases</div>
+                            <div class="feature-label">Covered</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">Vaccination</div>
+                            <div class="feature-label">Schedule</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">Local Breeds</div>
+                            <div class="feature-label">Included</div>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('animal_category', category='sheep') }}" class="btn">Learn About Sheep</a>
+                </div>
+            </div>
+
+            <!-- Ducks -->
+            <div class="animal-card">
+                <div class="animal-image" style="background-image: url('https://images.unsplash.com/photo-1557496251-2f576b9e3193?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                    <div class="animal-count">2+ Breeds</div>
+                </div>
+                <div class="animal-card-content">
+                    <div class="animal-icon">🦆</div>
+                    <h3>Ducks</h3>
+                    <p>Egg and meat production with Muscovy ducks, Khaki Campbell crosses, and waterfowl management practices.</p>
+                    <div class="animal-features">
+                        <div class="feature">
+                            <div class="feature-value">4+ Diseases</div>
+                            <div class="feature-label">Covered</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">Vaccination</div>
+                            <div class="feature-label">Schedule</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">Local Breeds</div>
+                            <div class="feature-label">Included</div>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('animal_category', category='ducks') }}" class="btn">Learn About Ducks</a>
+                </div>
+            </div>
+
+            <!-- Rabbits -->
+            <div class="animal-card">
+                <div class="animal-image" style="background-image: url('https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                    <div class="animal-count">2+ Breeds</div>
+                </div>
+                <div class="animal-card-content">
+                    <div class="animal-icon">🐇</div>
+                    <h3>Rabbits</h3>
+                    <p>Meat production with New Zealand White, Californian crosses, and hutch management for small-scale farming.</p>
+                    <div class="animal-features">
+                        <div class="feature">
+                            <div class="feature-value">4+ Diseases</div>
+                            <div class="feature-label">Covered</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">Health Care</div>
+                            <div class="feature-label">Guide</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">Breeding</div>
+                            <div class="feature-label">Tips</div>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('animal_category', category='rabbits') }}" class="btn">Learn About Rabbits</a>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="{{ url_for('home') }}" class="back-btn">Back to Home</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Smart Farming Solutions - Agricultural Excellence</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">Comprehensive animal husbandry guidance for modern farmers</p>
+        </div>
+    </footer>
+</body>
+</html>
