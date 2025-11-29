@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Smart Farming Solutions{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>Welcome, {{ current_user.full_name }}! 👋</h1>
+        <p>Here's your farming overview</p>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">🏠</div>
+            <div class="stat-info">
+                <h3>{{ farms|length }}</h3>
+                <p>Farms</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">🌱</div>
+            <div class="stat-info">
+                <h3>{{ soil_tests|length }}</h3>
+                <p>Soil Tests</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">🐄</div>
+            <div class="stat-info">
+                <h3>{{ animal_health|length }}</h3>
+                <p>Health Records</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">📍</div>
+            <div class="stat-info">
+                <h3>{{ current_user.location }}</h3>
+                <p>Location</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Actions -->
+    <div class="actions-grid">
+        <a href="{{ url_for('create_farm') }}" class="action-card">
+            <div class="action-icon">➕</div>
+            <h3>Add Farm</h3>
+            <p>Register a new farm profile</p>
+        </a>
+
+        <a href="{{ url_for('soil') }}" class="action-card">
+            <div class="action-icon">🌱</div>
+            <h3>Soil Analysis</h3>
+            <p>Test soil and get recommendations</p>
+        </a>
+
+        <a href="{{ url_for('animals') }}" class="action-card">
+            <div class="action-icon">🐄</div>
+            <h3>Animal Health</h3>
+            <p>Manage livestock health</p>
+        </a>
+
+        <a href="{{ url_for('profile') }}" class="action-card">
+            <div class="action-icon">👤</div>
+            <h3>My Profile</h3>
+            <p>Update your information</p>
+        </a>
+    </div>
+
+    <!-- Farms Section -->
+    <div class="section">
+        <div class="section-header">
+            <h2>My Farms</h2>
+            <a href="{{ url_for('create_farm') }}" class="btn btn-outline">Add Farm</a>
+        </div>
+
+        {% if farms %}
+        <div class="farms-grid">
+            {% for farm in farms %}
+            <div class="farm-card">
+                <h3>{{ farm.farm_name }}</h3>
+                <div class="farm-details">
+                    <p><strong>Size:</strong> {{ farm.farm_size }} hectares</p>
+                    <p><strong>Type:</strong> {{ farm.farm_type.title() }}</p>
+                    <p><strong>Soil:</strong> {{ farm.soil_type or 'Not specified' }}</p>
+                    {% if farm.main_crops %}
+                    <p><strong>Crops:</strong> {{ farm.main_crops }}</p>
+                    {% endif %}
+                    {% if farm.livestock_types %}
+                    <p><strong>Livestock:</strong> {{ farm.livestock_types }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">🏠</div>
+            <h3>No farms yet</h3>
+            <p>Add your first farm to get personalized recommendations</p>
+            <a href="{{ url_for('create_farm') }}" class="btn btn-primary">Add Your First Farm</a>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="activity-section">
+        <div class="recent-activity">
+            <h2>Recent Soil Tests</h2>
+            {% if soil_tests %}
+                {% for test in soil_tests %}
+                <div class="activity-item">
+                    <div class="activity-icon">🌱</div>
+                    <div class="activity-content">
+                        <p><strong>Soil Test</strong> - pH: {{ test.ph_level }}</p>
+                        <small>{{ test.test_date.strftime('%b %d, %Y') }}</small>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-muted">No soil tests recorded yet</p>
+            {% endif %}
+        </div>
+
+        <div class="recent-activity">
+            <h2>Recent Animal Health</h2>
+            {% if animal_health %}
+                {% for health in animal_health %}
+                <div class="activity-item">
+                    <div class="activity-icon">🐄</div>
+                    <div class="activity-content">
+                        <p><strong>{{ health.animal_type.title() }}</strong> - {{ health.disease_diagnosed or 'Health check' }}</p>
+                        <small>{{ health.treatment_date.strftime('%b %d, %Y') }}</small>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-muted">No health records yet</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Add Farm - Smart Farming Solutions{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <div class="form-card">
+        <div class="form-header">
+            <h1>Add New Farm</h1>
+            <p>Register your farm to get personalized recommendations</p>
+        </div>
+
+        <form method="POST" class="farm-form">
+            <div class="form-group">
+                <label for="farm_name">Farm Name</label>
+                <input type="text" id="farm_name" name="farm_name" required
+                       placeholder="e.g., Mulanje Coffee Farm" class="form-control">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="farm_size">Farm Size (hectares)</label>
+                    <input type="number" id="farm_size" name="farm_size" required
+                           step="0.1" min="0.1" class="form-control" placeholder="e.g., 2.5">
+                </div>
+
+                <div class="form-group">
+                    <label for="farm_type">Farm Type</label>
+                    <select id="farm_type" name="farm_type" required class="form-control">
+                        <option value="">Select farm type</option>
+                        <option value="crops">Crops Only</option>
+                        <option value="livestock">Livestock Only</option>
+                        <option value="mixed">Mixed Farming</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="soil_type">Main Soil Type</label>
+                <select id="soil_type" name="soil_type" class="form-control">
+                    <option value="">Select soil type</option>
+                    <option value="clay">Clay Soil</option>
+                    <option value="sandy">Sandy Soil</option>
+                    <option value="loamy">Loamy Soil</option>
+                    <option value="laterite">Laterite Soil</option>
+                    <option value="alluvial">Alluvial Soil</option>
+                    <option value="unknown">Not Sure</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="main_crops">Main Crops (if any)</label>
+                <input type="text" id="main_crops" name="main_crops"
+                       placeholder="e.g., Maize, Beans, Tobacco" class="form-control">
+                <small class="form-text">Separate multiple crops with commas</small>
+            </div>
+
+            <div class="form-group">
+                <label for="livestock_types">Livestock Types (if any)</label>
+                <input type="text" id="livestock_types" name="livestock_types"
+                       placeholder="e.g., Chickens, Goats, Cattle" class="form-control">
+                <small class="form-text">Separate multiple types with commas</small>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Create Farm</button>
+                <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

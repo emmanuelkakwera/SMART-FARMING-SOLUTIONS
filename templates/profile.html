@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - Smart Farming Solutions{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-header">
+        <h1>My Profile</h1>
+        <p>Manage your account information</p>
+    </div>
+
+    <div class="profile-card">
+        <form method="POST" class="profile-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="full_name">Full Name</label>
+                    <input type="text" id="full_name" name="full_name"
+                           value="{{ current_user.full_name }}" required class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username"
+                           value="{{ current_user.username }}" required class="form-control" readonly>
+                    <small class="form-text">Username cannot be changed</small>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone"
+                           value="{{ current_user.phone }}" required class="form-control" readonly>
+                    <small class="form-text">Phone number cannot be changed</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <select id="location" name="location" required class="form-control">
+                        <option value="Central Region" {% if current_user.location == 'Central Region' %}selected{% endif %}>Central Region</option>
+                        <option value="Northern Region" {% if current_user.location == 'Northern Region' %}selected{% endif %}>Northern Region</option>
+                        <option value="Southern Region" {% if current_user.location == 'Southern Region' %}selected{% endif %}>Southern Region</option>
+                        <option value="Lilongwe" {% if current_user.location == 'Lilongwe' %}selected{% endif %}>Lilongwe</option>
+                        <option value="Blantyre" {% if current_user.location == 'Blantyre' %}selected{% endif %}>Blantyre</option>
+                        <option value="Mzuzu" {% if current_user.location == 'Mzuzu' %}selected{% endif %}>Mzuzu</option>
+                        <option value="Zomba" {% if current_user.location == 'Zomba' %}selected{% endif %}>Zomba</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="language">Preferred Language</label>
+                <select id="language" name="language" class="form-control">
+                    <option value="en" {% if current_user.language == 'en' %}selected{% endif %}>English</option>
+                    <option value="ny" {% if current_user.language == 'ny' %}selected{% endif %}>Chichewa</option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Update Profile</button>
+                <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="account-info">
+        <h3>Account Information</h3>
+        <div class="info-grid">
+            <div class="info-item">
+                <strong>Member Since:</strong>
+                <span>{{ current_user.created_at.strftime('%B %d, %Y') }}</span>
+            </div>
+            <div class="info-item">
+                <strong>Farms:</strong>
+                <span>{{ current_user.farms|length }} registered</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

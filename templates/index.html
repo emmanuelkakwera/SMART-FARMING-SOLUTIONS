@@ -1,261 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Farming Solutions - Agricultural Guide</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+{% extends "base.html" %}
 
-        body {
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            background: linear-gradient(to right, #2e7d32, #4caf50);
-            color: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-links li {
-            margin-left: 1.5rem;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #c8e6c9;
-        }
-
-        .hero {
-            background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-            height: 500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            margin-bottom: 2rem;
-            border-radius: 8px;
-            position: relative;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            border-radius: 8px;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-
-        .sections {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .section-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            text-align: center;
-            padding: 3rem 2rem;
-        }
-
-        .section-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
-        }
-
-        .section-icon {
-            font-size: 5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .section-card h2 {
-            color: #2e7d32;
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-        }
-
-        .section-card p {
-            color: #666;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background: #4caf50;
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .btn:hover {
-            background: #2e7d32;
-        }
-
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 3rem;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: #4caf50;
-            margin-bottom: 1rem;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">Smart Farming Solutions</div>
-                <ul class="nav-links">
-                    <li><a href="{{ url_for('home') }}">Home</a></li>
-                    <li><a href="{{ url_for('soil') }}">Soil Guide</a></li>
-                    <li><a href="{{ url_for('animals') }}">Animal Husbandry</a></li>
-                </ul>
-            </nav>
+{% block content %}
+<div class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">Smart Farming Solutions</h1>
+        <p class="hero-subtitle">Modern agricultural guidance for Malawian farmers</p>
+        <p class="hero-description">Get personalized soil analysis, animal health management, and market insights tailored for your farm.</p>
+        
+        <div class="hero-actions">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-large">Go to Dashboard</a>
+            {% else %}
+                <a href="{{ url_for('register') }}" class="btn btn-primary btn-large">Get Started Free</a>
+                <a href="{{ url_for('login') }}" class="btn btn-secondary btn-large">Login</a>
+            {% endif %}
         </div>
-    </header>
+    </div>
+</div>
 
+<div class="features-section">
     <div class="container">
-        <div class="hero">
-            <div class="hero-content">
-                <h1>Smart Farming Solutions</h1>
-                <p>Modern agricultural guidance for better yields and healthier livestock</p>
-                <p>Expert knowledge for soil management and animal care</p>
-            </div>
-        </div>
-
-        <div class="sections">
-            <div class="section-card">
-                <div class="section-icon">🌱</div>
-                <h2>Soil Management</h2>
-                <p>Complete guide to soil types, crop compatibility, and soil activation techniques. Learn which crops grow best in different soil conditions and how to improve your soil health.</p>
-                <a href="{{ url_for('soil') }}" class="btn">Explore Soil Guide</a>
-            </div>
-
-            <div class="section-card">
-                <div class="section-icon">🐄</div>
-                <h2>Animal Husbandry</h2>
-                <p>Comprehensive information on raising healthy livestock. Includes breed information, vaccination schedules, disease prevention, and treatment protocols.</p>
-                <a href="{{ url_for('animals') }}" class="btn">Explore Animal Care</a>
-            </div>
-        </div>
-
-        <div class="features">
+        <h2 class="section-title">Everything You Need for Successful Farming</h2>
+        
+        <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3>Data-Driven</h3>
-                <p>Based on scientific research and agricultural best practices</p>
+                <div class="feature-icon">🌱</div>
+                <h3>Soil Management</h3>
+                <p>Test your soil, get crop recommendations, and track soil health improvements over time.</p>
+                <ul class="feature-list">
+                    <li>Soil testing guidance</li>
+                    <li>Personalized crop recommendations</li>
+                    <li>Fertilizer calculators</li>
+                    <li>Seasonal planning</li>
+                </ul>
             </div>
+            
             <div class="feature-card">
-                <div class="feature-icon">🌍</div>
-                <h3>Local Adaptation</h3>
-                <p>Tailored information for specific regional conditions</p>
+                <div class="feature-icon">🐄</div>
+                <h3>Animal Health</h3>
+                <p>Identify diseases, track treatments, and manage your livestock health records.</p>
+                <ul class="feature-list">
+                    <li>Disease identification</li>
+                    <li>Treatment tracking</li>
+                    <li>Vaccination reminders</li>
+                    <li>Breeding records</li>
+                </ul>
             </div>
+            
             <div class="feature-card">
-                <div class="feature-icon">💡</div>
-                <h3>Practical Solutions</h3>
-                <p>Easy-to-implement strategies for farmers</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔄</div>
-                <h3>Sustainable Practices</h3>
-                <p>Environmentally friendly farming methods</p>
+                <div class="feature-icon">💰</div>
+                <h3>Market Insights</h3>
+                <p>Access local market prices, connect with buyers, and maximize your profits.</p>
+                <ul class="feature-list">
+                    <li>Real-time price data</li>
+                    <li>Buyer connections</li>
+                    <li>Market trends</li>
+                    <li>Profit calculators</li>
+                </ul>
             </div>
         </div>
     </div>
+</div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2023 Smart Farming Solutions - Agricultural Excellence</p>
-        </div>
-    </footer>
-</body>
-</html>
+<div class="cta-section">
+    <div class="container">
+        <h2>Ready to Transform Your Farming?</h2>
+        <p>Join thousands of Malawian farmers using Smart Farming Solutions</p>
+        {% if not current_user.is_authenticated %}
+        <a href="{{ url_for('register') }}" class="btn btn-primary btn-large">Create Your Free Account</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
